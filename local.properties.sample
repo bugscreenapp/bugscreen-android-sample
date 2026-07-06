@@ -1,0 +1,9 @@
+# Copy this file to `local.properties` (which is git-ignored) and fill in the values below.
+#
+# Gradle needs the Android SDK location. Android Studio writes this automatically; if you
+# build from the command line, point it at your SDK install.
+# sdk.dir=/Users/you/Library/Android/sdk
+
+# Your BugScreen API key from the BugScreen console (https://bugscreen.app).
+# Starts with "fb_". Leave blank to build and run the app without uploading reports.
+bugscreen.apiKey=fb_your_api_key_here

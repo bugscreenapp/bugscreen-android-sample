@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Window background painted before Compose draws, to avoid a color flash on launch.
+         Kept in sync with the Compose surface colors in ui/theme/Color.kt. -->
+    <color name="window_background">#FBF8F3</color>
+</resources>
