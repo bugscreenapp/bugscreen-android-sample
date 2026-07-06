@@ -10,6 +10,13 @@ info, your custom data, and a breadcrumb log. Testers never leave the app.
 The SDK is wired into a small but complete travel app (Kotlin, Jetpack Compose / Material 3), so you
 can see it working in a real navigation stack. [More on the demo app below.](#the-demo-app)
 
+> **See what a report looks like** →
+> [Sample bug report](https://github.com/bugscreenapp/bugscreen-android-sample/issues/1) is a real
+> report filed from this app. It shows everything a tester's screenshot delivers: the annotated
+> screenshot, the reporter's type/severity classification, full device and OS metadata, and the
+> custom data this app attaches (`userId`, `plan`, `homeCity`, `sessionId`). Reports can land in
+> GitHub Issues, Jira, ClickUp, Slack, and more.
+
 ## The integration
 
 Everything BugScreen-related lives in a handful of clearly-commented spots:
