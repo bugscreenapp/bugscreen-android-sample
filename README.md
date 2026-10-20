@@ -36,8 +36,8 @@ Automatic screenshot detection needs no wiring beyond step 1; it's on by default
 ```kotlin
 // app/build.gradle.kts
 dependencies {
-    debugImplementation("app.bugscreen:android:1.3.0")        // full SDK in debug builds
-    releaseImplementation("app.bugscreen:android-no-op:1.3.0") // no-op stub in release builds
+    debugImplementation("app.bugscreen:android:1.8.0")        // full SDK in debug builds
+    releaseImplementation("app.bugscreen:android-no-op:1.8.0") // no-op stub in release builds
 }
 ```
 
