@@ -56,7 +56,8 @@ never branches on build type. The API key is read from `local.properties` and ex
    # then edit local.properties:
    #   bugscreen.apiKey=fb_your_api_key_here
    ```
-   You can leave the key blank. The app still builds and runs; you just can't upload reports.
+   You can leave the key blank to build and browse the Travel app. A valid app key is required
+   to load reporter settings and upload reports; a blank or invalid key shows a settings-loading error.
 3. Run the `app` configuration on a device or emulator (Android 7.0 / API 24 or newer).
 4. Try the headline flow: open the app and take a screenshot (Power + Volume-Down, or
    `adb shell input keyevent 120`). The report screen opens by itself.
@@ -99,5 +100,5 @@ app/src/main/java/app/bugscreen/example/travel/
 - **No persistence.** Saved destinations live in memory and reset when the process is killed.
 - **No bundled photos.** Destination "images" are gradients generated from each place's category
   (see `ui/components/HeroImage.kt`), which keeps the repo small and free of image licensing.
-- **Uploads need a real key.** With a blank `bugscreen.apiKey` the report screen still opens; it
-  just can't submit. Add your `fb_...` key to see reports land in your BugScreen console.
+- **Reporting needs a real key.** A blank or invalid `bugscreen.apiKey` cannot load report
+  settings. Add your `fb_...` key to open the form and submit reports.
