@@ -12,7 +12,7 @@ coroutines = "1.9.0"
 junit = "4.13.2"
 
 # BugScreen SDK — published on Maven Central. Real SDK on debug, no-op stub on release.
-bugscreen = "1.8.0"
+bugscreen = "1.9.0"
 
 [libraries]
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
@@ -32,7 +32,7 @@ androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-compose-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
 
-# BugScreen: identical public API in both artifacts, so app code never branches on build type.
+# BugScreen: SDK calls use the same API in both build variants.
 bugscreen-android = { module = "app.bugscreen:android", version.ref = "bugscreen" }
 bugscreen-android-noop = { module = "app.bugscreen:android-no-op", version.ref = "bugscreen" }
 

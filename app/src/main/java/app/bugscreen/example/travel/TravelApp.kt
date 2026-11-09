@@ -3,6 +3,8 @@ package app.bugscreen.example.travel
 import android.app.Application
 import app.bugscreen.android.BugScreenConfig
 import app.bugscreen.android.BugScreenSDK
+import app.bugscreen.android.ScreenRecordingOptions
+import app.bugscreen.android.ScreenRecordingQuality
 import app.bugscreen.example.travel.data.TravelRepository
 import java.util.UUID
 
@@ -26,6 +28,9 @@ class TravelApp : Application() {
                 .apiKey(BuildConfig.BUGSCREEN_API_KEY) // supplied via local.properties; "" is fine
                 .screenshotDetection(true)
                 .debug(BuildConfig.DEBUG)
+                .captureSystemLogs(true)
+                .screenRecordingOptions(ScreenRecordingOptions(durationSeconds = 15, quality = ScreenRecordingQuality.BALANCED))
+                .showFloatingButton(true)
                 .requestPermissionsOnStart(true)
                 .build(),
         )
