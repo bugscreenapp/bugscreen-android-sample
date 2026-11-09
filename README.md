@@ -2,7 +2,7 @@
 
 A reference for wiring the [BugScreen](https://bugscreen.app) bug-reporting SDK into an Android app.
 If you're evaluating BugScreen or setting it up for the first time, this repo shows every integration
-point in a working app. Copy the five spots below and you have a full integration.
+point in a working app.
 
 A tester takes a screenshot anywhere in the app and the report screen opens. Reports include device
 info, your custom data, and a breadcrumb log. Testers never leave the app.
@@ -28,6 +28,7 @@ Everything BugScreen-related lives in a handful of clearly-commented spots:
 | 3 | Attach user / session context | [`TravelApp.kt`](app/src/main/java/app/bugscreen/example/travel/TravelApp.kt) → `registerSignedInUser()` (`setCustomData`) |
 | 4 | Log breadcrumbs at meaningful events | [`BugScreenBreadcrumbs.kt`](app/src/main/java/app/bugscreen/example/travel/bugscreen/BugScreenBreadcrumbs.kt) (`BugScreenSDK.log`) |
 | 5 | Manual "Report a problem" entry point | [`ProfileScreen.kt`](app/src/main/java/app/bugscreen/example/travel/ui/profile/ProfileScreen.kt) → `openBugReportScreen(context)` |
+| 6 | Exercise capture controls | [`ProfileScreen.kt`](app/src/main/java/app/bugscreen/example/travel/ui/profile/ProfileScreen.kt) → `CaptureControls()` |
 
 Automatic screenshot detection needs no wiring beyond step 1; it's on by default.
 
@@ -36,14 +37,14 @@ Automatic screenshot detection needs no wiring beyond step 1; it's on by default
 ```kotlin
 // app/build.gradle.kts
 dependencies {
-    debugImplementation("app.bugscreen:android:1.8.0")        // full SDK in debug builds
-    releaseImplementation("app.bugscreen:android-no-op:1.8.0") // no-op stub in release builds
+    debugImplementation("app.bugscreen:android:1.9.0")        // full SDK in debug builds
+    releaseImplementation("app.bugscreen:android-no-op:1.9.0") // no-op stub in release builds
 }
 ```
 
 BugScreen is a dev/QA tool. The `no-op` artifact exposes the same API and does nothing, so release
-builds ship no bug-reporting code to production users. Because the API is identical, your app code
-never branches on build type. The API key is read from `local.properties` and exposed via a
+builds ship no bug-reporting code to production users. SDK calls use the same API in both builds.
+The sample shows the capture controls in debug builds. The API key is read from `local.properties` and exposed via a
 `BUGSCREEN_API_KEY` `buildConfigField`, so no key is committed to source control.
 
 ## Run it
@@ -65,6 +66,27 @@ never branches on build type. The API key is read from `local.properties` and ex
 > **JDK note:** this project targets JDK 17 (AGP 8.11). Android Studio's bundled JDK works out of
 > the box. From the command line, run Gradle with a JDK 17–21 (e.g. `JAVA_HOME=<jdk17>`). The
 > compile toolchain is pinned to 17 and auto-provisioned if you don't have it installed.
+
+## Try the BugScreen 1.9 controls
+
+In a debug build, open **Profile → BugScreen capture controls**. Use a physical device to try
+shake-to-report. Recording requires Android 10 or newer and a supported encoder.
+
+- **Floating button.** Tap the floating BugScreen button to open its menu. Use **Hide floating
+  button** and **Show floating button** to change its visibility.
+- **Recent recording.** Select **Start recent recording**, then approve the system prompt.
+  **Check recording status** reads the current state from the SDK. Reproduce the issue and open
+  the reporter while recording to attach up to 15 seconds of recent video. **Stop recent
+  recording** clears the rolling buffer.
+- **Report notification.** Select **Show report notification** and allow notifications when
+  asked. Pull down the notification shade over the app and tap the BugScreen notification. Use
+  **Hide report notification** to remove the shortcut.
+- **Shake-to-report.** Select **Enable shake-to-report**, then deliberately shake the device
+  while the app is open. **Disable shake-to-report** turns the shortcut off.
+
+[`TravelApp.kt`](app/src/main/java/app/bugscreen/example/travel/TravelApp.kt) opts in to
+attaching available app-process logcat records. Keep secrets and personal data out of logs when
+testing reports.
 
 ## The demo app
 
